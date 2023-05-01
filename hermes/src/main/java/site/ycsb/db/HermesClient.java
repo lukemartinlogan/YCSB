@@ -24,6 +24,7 @@
 package site.ycsb.db;
 
 import site.ycsb.ByteIterator;
+import site.ycsb.StringByteIterator;
 import site.ycsb.DB;
 import site.ycsb.DBException;
 import site.ycsb.Status;
@@ -52,10 +53,12 @@ public class HermesClient extends DB {
   @Override
   public Status read(String table, String key, Set<String> fields,
       Map<String, ByteIterator> result) {
-    KVTable kvTable = KVStore.getTable(table);
-    Map<String, ByteIterator> record = kvTable.read(key, fields);
-    for (String field : fields) {
-      result.put(field, record.get(field));
+    try {
+      KVTable kvTable = KVStore.getTable(table);
+      Map<String, String> record = kvTable.read(key, fields);
+      StringByteIterator.putAllAsByteIterators(result, record);
+    } catch (Exception e) {
+      e.printStackTrace();
     }
     return result.isEmpty() ? Status.ERROR : Status.OK;
   }
@@ -63,13 +66,19 @@ public class HermesClient extends DB {
   @Override
   public Status insert(String table, String key,
       Map<String, ByteIterator> values) {
-    KVTable kvTable = KVStore.getTable(table);
-    kvTable.update(key, values);
+    try {
+      KVTable kvTable = KVStore.getTable(table);
+      Map<String, String> newValues = StringByteIterator.getStringMap(values);
+      kvTable.insert(key, newValues);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
     return Status.OK;
   }
 
   @Override
   public Status delete(String table, String key) {
+    System.out.println("delete");
     KVTable kvTable = KVStore.getTable(table);
     kvTable.destroy();
     return Status.OK;
@@ -78,8 +87,13 @@ public class HermesClient extends DB {
   @Override
   public Status update(String table, String key,
       Map<String, ByteIterator> values) {
-    KVTable kvTable = KVStore.getTable(table);
-    kvTable.update(key, values);
+    try {
+      KVTable kvTable = KVStore.getTable(table);
+      Map<String, String> newValues = StringByteIterator.getStringMap(values);
+      kvTable.update(key, newValues);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
     return Status.OK;
   }
 

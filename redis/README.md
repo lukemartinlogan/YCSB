@@ -45,15 +45,20 @@ Set host, port, password, and cluster mode in the workload you plan to run.
 
 Or, you can set configs with the shell command, EG:
 
-    ./bin/ycsb load redis -s -P workloads/workloada -p "redis.host=127.0.0.1" -p "redis.port=6379" > outputLoad.txt
+```
+python2 bin/ycsb load redis -s -P workloads/workloada -p "redis.host=127.0.0.1" -p "redis.port=6379" > outputLoad.txt
+```
 
 ### 5. Load data and run tests
 
 Load the data:
 
-    ./bin/ycsb load redis -s -P workloads/workloada > outputLoad.txt
+```
+python2 bin/ycsb load redis -s -P workloads/workloadd -p "redis.host=127.0.0.1" -p "redis.port=6379"
+```
 
 Run the workload test:
-
-    ./bin/ycsb run redis -s -P workloads/workloada > outputRun.txt
+```
+python2 bin/ycsb run redis -s -P workloads/workloadd -p "redis.host=127.0.0.1" -p "redis.port=6379"
+```
 

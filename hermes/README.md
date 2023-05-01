@@ -30,17 +30,18 @@ Setup paths and compile
 spack load --only dependencies hermes
 export HERMES_ROOT=/home/lukemartinlogan/Documents/Projects/PhD/hermes
 export PATH=$JAVA_HOME/bin:$PATH
-export LD_LIBRARY_PATH=$HERMES_ROOT/cmake-build-debug-gcc-no-sanitize/bin:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=$HERMES_ROOT/cmake-build-release-gcc/bin:$LD_LIBRARY_PATH
 mvn -pl site.ycsb:hermes-binding -am clean package
 ```
 
 ### 4. Load data and run tests
 
 Load the data:
-
-    ./bin/ycsb load hermes -s -P workloads/workloada > outputLoad.txt
+```
+python2 bin/ycsb load hermes -s -P workloads/workloada
+```
 
 Run the workload test:
-
-    ./bin/ycsb run hermes -s -P workloads/workloada > outputRun.txt
-
+```
+python2 bin/ycsb run hermes -s -P workloads/workloada
+```

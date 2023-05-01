@@ -45,11 +45,11 @@ Git clone YCSB and compile:
 
 Load the data:
 
-    ./bin/ycsb load memcached -s -P workloads/workloada > outputLoad.txt
+    python2 bin/ycsb load memcached -s -P workloads/workloadd -p "memcached.hosts=127.0.0.1"
 
 Run the workload test:
 
-    ./bin/ycsb run memcached -s -P workloads/workloada > outputRun.txt
+    python2 bin/ycsb run memcached -s -P workloads/workloadd -p "memcached.hosts=127.0.0.1"
 
 ## 5. memcached Connection Parameters
 

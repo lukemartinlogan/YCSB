@@ -32,11 +32,11 @@ Clone the YCSB git repository and compile:
 
 Now you are ready to run! First, load the data:
 
-    ./bin/ycsb load rocksdb -s -P workloads/workloada -p rocksdb.dir=/tmp/ycsb-rocksdb-data
+    python2 bin/ycsb load rocksdb -s -P workloads/workloadc -p rocksdb.dir=/tmp/ycsb-rocksdb-data
 
 Then, run the workload:
 
-    ./bin/ycsb run rocksdb -s -P workloads/workloada -p rocksdb.dir=/tmp/ycsb-rocksdb-data
+    python2 bin/ycsb run rocksdb -s -P workloads/workloadc -p rocksdb.dir=/tmp/ycsb-rocksdb-data
 
 ## RocksDB Configuration Parameters
 
